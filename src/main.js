@@ -106,8 +106,7 @@ if (formEl) {
 }
 
 if(actionShowMoreImagesEl) {
-  actionShowMoreImagesEl.addEventListener('click', (event) => {
-    console.log(galleryEl.getBoundingClientRect());
+  actionShowMoreImagesEl.addEventListener('click', () => {
     const inputSearchValue = inputSearchEl.value;
     requestImages(inputSearchValue, false);
   });
