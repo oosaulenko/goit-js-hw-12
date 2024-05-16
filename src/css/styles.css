@@ -5,21 +5,127 @@
   |============================
 */
 @import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+@import url('./module/loader.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nothing+You+Could+Do&display=swap');
 
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+* {
+  box-sizing: border-box;
+}
 
-  color: #242424;
-  background-color: rgba(255, 255, 255, 0.87);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  background-color: #fff;
+  color: #212121;
+  line-height: 1.5;
+}
+
+.is-hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 0 24px;
+
+  .item {
+    border: 1px solid #808080;
+
+    img {
+      width: 100%;
+      height: 152px;
+      object-fit: cover;
+    }
+
+    .data {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      color: #2E2F42;
+      font-size: 12px;
+      padding: 4px;
+
+      p {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      b {
+        font-weight: 600;
+        line-height: 16px;
+      }
+
+      span {
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+.button, .field-input {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 2.2px;
+  padding: 8px 16px;
+}
+
+.field-input {
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 272px;
+  color: #2E2F42;
+  outline: none;
+
+  &:disabled {
+    background-color: #F5F5F5;
+    border-color: #808080;
+  }
+
+  &:hover {
+    border-color: #000;
+  }
+
+  &:focus {
+    border-color: #4E75FF;
+  }
+}
+
+.button {
+  border-radius: 8px;
+  background-color: #4e75ff;
+  font-weight: 500;
+  color: #fff;
+  border: 0;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #CFCFCF;
+    color: #989898;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: #6C8CFF;
+  }
+}
+
+.form.form-search {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.actionShowMoreImages {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
 }

@@ -8,16 +8,13 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load ="partials/header.html" />
+    <form class="form form-search">
+      <input class="field field-input field-input_search" name="search" type="text" placeholder="Search images..." />
+      <button class="button button-primary" type="submit">Search</button>
+    </form>
 
-    <section>
-      <h1>Example page title</h1>
-      <!-- Path to images as from index.html file -->
-      <img src="./img/javascript.svg" alt="" />
-    </section>
-
-    <!-- Loads the specified .html file -->
-    <load ="partials/vite-promo.html" />
+    <div class="gallery"></div>
+    <button class="actionShowMoreImages button button-primary is-hidden">Show more</button>
 
     <script type="module" src="./main.js"></script>
   </body>
