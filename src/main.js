@@ -21,8 +21,6 @@ function requestImages(searchQuery, isFirstLoad = true) {
     page = 1;
   }
 
-  if(pages < page) return;
-
   fetchImages(searchQuery, page)
     .then((response) => {
       const { hits, totalHits } = response.data;
@@ -40,42 +38,47 @@ function requestImages(searchQuery, isFirstLoad = true) {
         });
         pages = 1;
         formEl.reset();
-      } else {
-        pages = Math.ceil(totalHits / API.PIXABAY.PER_PAGE);
-        page += 1;
+        return;
+      }
 
-        if(pages < page) {
-          actionShowMoreImagesEl.classList.add('is-hidden');
-          iziToast.error({
-            message: 'We\'re sorry, but you\'ve reached the end of search results.',
-            position: 'topRight',
-            class: 'error',
-            color: 'white',
-          });
+      pages = Math.ceil(totalHits / API.PIXABAY.PER_PAGE);
 
-          return;
-        }
-
-        hits.forEach((image) => {
-          imagesHtml.push(renderTemplate(image));
+      if(pages < page) {
+        actionShowMoreImagesEl.classList.add('is-hidden');
+        iziToast.error({
+          message: 'We\'re sorry, but you\'ve reached the end of search results.',
+          position: 'topRight',
+          class: 'error',
+          color: 'white',
         });
 
-        if(isFirstLoad) {
-          galleryEl.innerHTML = imagesHtml.join('');
-        } else {
-          galleryEl.insertAdjacentHTML('beforeend', imagesHtml.join(''));
-
-          const itemGalleryHeight =  galleryEl.querySelector('.item');
-
-          window.scrollBy({
-            top: itemGalleryHeight.getBoundingClientRect().height * 2,
-            behavior: 'smooth',
-          });
-        }
-
-        actionShowMoreImagesEl.classList.remove('is-hidden');
-        lightbox.refresh();
+        return;
       }
+
+      page += 1;
+
+      hits.forEach((image) => {
+        imagesHtml.push(renderTemplate(image));
+      });
+
+      if(isFirstLoad) {
+        galleryEl.innerHTML = imagesHtml.join('');
+      } else {
+        galleryEl.insertAdjacentHTML('beforeend', imagesHtml.join(''));
+
+        const itemGalleryHeight =  galleryEl.querySelector('.item');
+
+        window.scrollBy({
+          top: itemGalleryHeight.getBoundingClientRect().height * 2,
+          behavior: 'smooth',
+        });
+      }
+
+      if(pages > 1) {
+        actionShowMoreImagesEl.classList.remove('is-hidden');
+      }
+
+      lightbox.refresh();
     })
     .catch((error) => {
       console.log(error);
