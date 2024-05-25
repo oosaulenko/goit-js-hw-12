@@ -78,6 +78,10 @@ function requestImages(searchQuery, isFirstLoad = true) {
         actionShowMoreImagesEl.classList.remove('is-hidden');
       }
 
+      if(page > pages) {
+        actionShowMoreImagesEl.classList.add('is-hidden');
+      }
+
       lightbox.refresh();
     })
     .catch((error) => {
